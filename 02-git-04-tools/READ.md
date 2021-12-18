@@ -17,4 +17,9 @@ b14b74c4939dcab573326f4e3ee2a62e23e12f89 ,[Website] vmc provider links
 d5f9411f5108260320064349b757f55c09bc4b80 ,command: Fix bug when using terraform login on Windows
 4b6d06cc5dcb78af637bbb19c198faff37a066ed ,Update CHANGELOG.md
 
-5.
+5.commit 5af1e6234ab6da412fb8637393c5a17a1b293663
+
+6.commit 35a058fb3ddfae9cfee0b3893822c9a95b920f4c
+commit c0b17610965450a89598da491ce9b6b5cbd6393f
+
+7.James Bardin <j.bardin@gmail.com>
