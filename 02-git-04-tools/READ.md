@@ -12,7 +12,7 @@
 >56cd7859e05c36c06b56d013b55a252d0bb7e158 ---
 9ea88f22fc6269854151c571162c5bcf958bee2b
 
-При помощи комманды - 
+При помощи комманды - git log b8d720 -p
 
 4. Перечисляю все хеши и комментарии коммитов которые были сделаны между тегами v0.12.23 и v0.12.24:
 
@@ -33,12 +33,12 @@
 > 
 > 4b6d06cc5dcb78af637bbb19c198faff37a066ed ,Update CHANGELOG.md
 
-При помощи комманды - 
+При помощи комманды - git log v0.12.24 -s
 
 5. Коммит в котором была создана функция func providerSource 
 >commit 5af1e6234ab6da412fb8637393c5a17a1b293663
 
-При помощи комманды - 
+При помощи комманды - git grep providerSource
 
 6. Все коммиты в которых была изменена функция globalPluginDirs:
 
@@ -46,10 +46,10 @@
 > 
 > commit c0b17610965450a89598da491ce9b6b5cbd6393f
 
-При помощи комманды - 
+При помощи комманды - git grep globalPluginDirs
 
 7. Автор функции synchronizedWriters
 
 >James Bardin <j.bardin@gmail.com>
 
-При помощи комманды - 
+При помощи комманды - git grep synchronizedWriters
