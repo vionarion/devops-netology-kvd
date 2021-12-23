@@ -33,12 +33,12 @@
 > 
 > 4b6d06cc5dcb78af637bbb19c198faff37a066ed ,Update CHANGELOG.md
 
-При помощи комманды - git log v0.12.24 -s
+При помощи комманды - git log --pretty=format:"%H %s" v0.12.24
 
 5. Коммит в котором была создана функция func providerSource 
 >commit 5af1e6234ab6da412fb8637393c5a17a1b293663
 
-При помощи комманды - git grep providerSource
+При помощи комманды - git log -S “func providerSource” --pretty=format:"%h, %an, %ad, %s"
 
 6. Все коммиты в которых была изменена функция globalPluginDirs:
 
@@ -46,10 +46,10 @@
 > 
 > commit c0b17610965450a89598da491ce9b6b5cbd6393f
 
-При помощи комманды - git grep globalPluginDirs
+При помощи комманды - git grep -p "globalPluginDirs("
 
 7. Автор функции synchronizedWriters
 
 >James Bardin <j.bardin@gmail.com>
 
-При помощи комманды - git grep synchronizedWriters
+При помощи комманды - git grep -p synchronizedWriters
