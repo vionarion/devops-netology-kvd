@@ -33,7 +33,7 @@
 > 
 > 4b6d06cc5dcb78af637bbb19c198faff37a066ed ,Update CHANGELOG.md
 
-При помощи комманды - git log --pretty=format:"%H %s" v0.12.24
+При помощи комманды - git log --pretty=format:"%H %s" v0.12.23..v0.12.24
 
 5. Коммит в котором была создана функция func providerSource 
 >commit 5af1e6234ab6da412fb8637393c5a17a1b293663
@@ -52,4 +52,4 @@
 
 >James Bardin <j.bardin@gmail.com>
 
-При помощи комманды - git grep -p synchronizedWriters
+При помощи комманды - git grep -p "synchronizedWriters"
