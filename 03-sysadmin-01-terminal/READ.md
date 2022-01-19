@@ -78,19 +78,9 @@ cp /bin/bash /tmp/new_path_dir/
 
 type -a bash
 
-bash is /usr/bin/bash
-
-bash is /bin/bash
-
 PATH=/tmp/new_path_dir/:$PATH
 
 type -a bash
-
-bash is /tmp/new_path_dir/bash
-
-bash is /usr/bin/bash
-
-bash is /bin/bash
 ````
 9. Чем отличается планирование команд с помощью `batch` и `at`?
 
