@@ -46,11 +46,17 @@ vagrant@vagrant:~$ ls: cannot access 'root': No such file or directory
 5. Получится ли одновременно передать команде файл на stdin и вывести ее stdout в другой файл? Приведите работающий пример.
 
 vagrant@vagrant:~$ touch test_2
+
 vagrant@vagrant:~$ cat test
+
 1525312 sad123asxcz123sssxxx9 62
+
 vagrant@vagrant:~$ cat <test >test_2
+
 vagrant@vagrant:~$ cat test_2
+
 1525312 sad123asxcz123sssxxx9 62
+
 vagrant@vagrant:~$
 
 6. Получится ли вывести находясь в графическом режиме данные из PTY в какой-либо из эмуляторов TTY? Сможете ли вы наблюдать выводимые данные?
