@@ -2,24 +2,36 @@
 1. Какого типа команда `cd`? Попробуйте объяснить, почему она именно такого типа; опишите ход своих мыслей, если считаете что она могла бы быть другого типа.
 
 Это команда встройенная.
+
 Встроенная, потому что, работать внутри сессии терминала логичнее менять указатель на текущую дерикторию внутренней функцией, 
+
 Если использовать внешний вызов, то он будет работать со своим окружением, и менять текущий каталог внутри своего окружения, а на вызвовший shell влиять не будет.  
+
 
 2. Какая альтернатива без pipe команде `grep <some_string> <some_file> | wc -l`? `man grep` поможет в ответе на этот вопрос. Ознакомьтесь с [документом](http://www.smallo.ruhr.de/award.html) о других подобных некорректных вариантах использования pipe.
 
 vagrant@vagrant:~$ cat test
+
 1525312 sad123asxcz123sssxxx9 62
+
 vagrant@vagrant:~$ grep 6 test -c
+
 1
+
 vagrant@vagrant:~$ grep 6 test | wc -l
+
 1
+
 vagrant@vagrant:~$ grep 7 test -c
+
 0
+
 
 3. Какой процесс с PID `1` является родителем для всех процессов в вашей виртуальной машине Ubuntu 20.04?
 
-На виртуальной машине  - systemd:
+
 vagrant@vagrant:~$ pstree -p
+
 systemd(1)─┬─VBoxService(989)─┬─{VBoxService}(991)
            │                  ├─{VBoxService}(992)
            │                  ├─{VBoxService}(994)
@@ -31,15 +43,21 @@ systemd(1)─┬─VBoxService(989)─┬─{VBoxService}(991)
 Вывод сессии pts/0:
 
 vagrant@vagrant:~$ ls -l \root 2>/dev/pts/1
+
 vagrant@vagrant:~$ who
+
 vagrant  pts/0        2022-02-07 15:01 (10.0.2.2)
+
 vagrant  pts/1        2022-02-07 15:02 (10.0.2.2)
+
 vagrant@vagrant:~$
 
 Вывод в другой сессии pts/1:
 
 vagrant@vagrant:~$ ls -l \root 2>/dev/pts/1
+
 ls: cannot access 'root': No such file or directory
+
 vagrant@vagrant:~$ ls: cannot access 'root': No such file or directory
 
 
@@ -62,40 +80,60 @@ vagrant@vagrant:~$
 6. Получится ли вывести находясь в графическом режиме данные из PTY в какой-либо из эмуляторов TTY? Сможете ли вы наблюдать выводимые данные?
 
 Вывести полуится при использовании перенаправлении вывода:
-    15:04:58 alex@upc(0):~/vagrant$ tty
-    /dev/pts/3
-    15:05:45 alex@upc(0):~/vagrant$ echo Hello from pts3 to tty3 >/dev/tty3
-    15:06:19 alex@upc(0):~/vagrant$ 
+    
+15:04:58 alex@upc(0):~/vagrant$ tty
+   
+ /dev/pts/3
+   
+ 15:05:45 alex@upc(0):~/vagrant$ echo Hello from pts3 to tty3 >/dev/tty3
+  
+ 15:06:19 alex@upc(0):~/vagrant$ 
 
 но наблюдать в графическом режиме не получиться, нужно переключиться в контекст TTY (Ctrl-Alt-F3 в моем случае):
 
 
 Так же можно перенаправить контекст из tty в pty, этот вывод можно наблюдать уже будет, но после возврата в графический режим:
-    15:05:03 alex@upc(1):~/vagrant$ tty
-    /dev/pts/1
-    15:05:43 alex@upc(1):~/vagrant$ hello from tty3 to pts1
+    
+15:05:03 alex@upc(1):~/vagrant$ tty
+
+/dev/pts/1
+
+15:05:43 alex@upc(1):~/vagrant$ hello from tty3 to pts1
+
 
 Или перенаправление вывода из tty3 при работе на гостевой ОС:
-    vagrant@vagrant:~$ 
-    vagrant@vagrant:~$ tty
-    /dev/pts/0
-    vagrant@vagrant:~$ hello from tty3 to pts0
+   
+ vagrant@vagrant:~$ 
+    
+vagrant@vagrant:~$ tty
+    
+/dev/pts/0
+    
+vagrant@vagrant:~$ hello from tty3 to pts0
 
 7. Выполните команду `bash 5>&1`. К чему она приведет? Что будет, если вы выполните `echo netology > /proc/$$/fd/5`? Почему так происходит?
 
 bash 5>&1 - Создаст дескриптор с 5 и перенатправит его в stdout
+
 echo netology > /proc/$$/fd/5 - выведет в дескриптор "5", который был пернеаправлен в stdout
 
-если запустить echo netology > /proc/$$/fd/5 в новой сесии, получим ошибку, так как такого дескриптора нет на данный момент в текущей(новой) сесии
+если запустить echo netology > /proc/$$/fd/5 в новой сесии, получим ошибку, так как такого дескриптора нет на данный момент в текущей(новой) сессии
 
     
 vagrant@vagrant:~$ echo netology > /proc/$$/fd/5
+
 -bash: /proc/1096/fd/5: No such file or directory
+
 vagrant@vagrant:~$ bash 5>&1
+
 vagrant@vagrant:~$ echo netology > /proc.$$/fd/5
+
 bash: /proc.1114/fd/5: No such file or directory
+
 vagrant@vagrant:~$ echo netology > /proc/$$/fd/5
+
 netology
+
 vagrant@vagrant:~$ 
 
 8. Получится ли в качестве входного потока для pipe использовать только stderr команды, не потеряв при этом отображение stdout на pty? Напоминаем: по умолчанию через pipe передается только stdout команды слева от `|` на stdin команды справа.
