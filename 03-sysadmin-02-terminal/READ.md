@@ -2,63 +2,56 @@
 1. Какого типа команда `cd`? Попробуйте объяснить, почему она именно такого типа; опишите ход своих мыслей, если считаете что она могла бы быть другого типа.
 
 Это команда встройенная.
-Внвстроенная, потому что, работать внутри сессии терминала логичнее менять указатель на текущую дерикторию внутренней функцией, 
-Еслииспользовать внешний вызов, то он будет работать со своим окружением, и менять  текущий каталог внутри своего окружения, а на вызвовший shell влиять не будет.  
+Встроенная, потому что, работать внутри сессии терминала логичнее менять указатель на текущую дерикторию внутренней функцией, 
+Если использовать внешний вызов, то он будет работать со своим окружением, и менять текущий каталог внутри своего окружения, а на вызвовший shell влиять не будет.  
 
 2. Какая альтернатива без pipe команде `grep <some_string> <some_file> | wc -l`? `man grep` поможет в ответе на этот вопрос. Ознакомьтесь с [документом](http://www.smallo.ruhr.de/award.html) о других подобных некорректных вариантах использования pipe.
 
-vagrant@vagrant:~$ cat tst_bash
-if [[ -d /tmp ]];
-sdgsdfgfd
-sdgsdfgfghdgfd
-123
-vagrant@vagrant:~$ grep 123 tst_bash -c
+vagrant@vagrant:~$ cat test
+1525312 sad123asxcz123sssxxx9 62
+vagrant@vagrant:~$ grep 6 test -c
 1
-vagrant@vagrant:~$ grep 123 tst_bash |wc -l
+vagrant@vagrant:~$ grep 6 test | wc -l
 1
+vagrant@vagrant:~$ grep 7 test -c
+0
 
 3. Какой процесс с PID `1` является родителем для всех процессов в вашей виртуальной машине Ubuntu 20.04?
 
 На виртуальной машине  - systemd:
 vagrant@vagrant:~$ pstree -p
-systemd(1)─┬─VBoxService(754)─┬─{VBoxService}(755)
-           │                  ├─{VBoxService}(756)
-           │                  ├─{VBoxService}(757)
+systemd(1)─┬─VBoxService(989)─┬─{VBoxService}(991)
+           │                  ├─{VBoxService}(992)
+           │                  ├─{VBoxService}(994)
+           │                  ├─{VBoxService}(997)
+           │                  ├─{VBoxService}(998)
 
 4. Как будет выглядеть команда, которая перенаправит вывод stderr `ls` на другую сессию терминала?
 
+Вывод сессии pts/0:
+
 vagrant@vagrant:~$ ls -l \root 2>/dev/pts/1
-vagrant@vagrant:~$ 
-    
-
-Вывод в другой сессии pts/1:    
-
 vagrant@vagrant:~$ who
-vagrant  pts/0        2020-11-01 12:58 (10.0.2.2)
-vagrant  pts/1        2020-11-01 12:59 (10.0.2.2)
+vagrant  pts/0        2022-02-07 15:01 (10.0.2.2)
+vagrant  pts/1        2022-02-07 15:02 (10.0.2.2)
+vagrant@vagrant:~$
+
+Вывод в другой сессии pts/1:
+
+vagrant@vagrant:~$ ls -l \root 2>/dev/pts/1
+ls: cannot access 'root': No such file or directory
 vagrant@vagrant:~$ ls: cannot access 'root': No such file or directory
 
 
 5. Получится ли одновременно передать команде файл на stdin и вывести ее stdout в другой файл? Приведите работающий пример.
 
-vagrant@vagrant:~$ cat tst_bash
-if [[ -d /tmp ]];
-sdgsdfgfd
-sdgsdfgfghdgfd
-123
-new line
-11111111
-vagrant@vagrant:~$ cat tst_bash_out
-cat: tst_bash_out: No such file or directory 
-vagrant@vagrant:~$ cat <tst_bash >tst_bash_out
-vagrant@vagrant:~$ cat tst_bash_out
-if [[ -d /tmp ]];
-sdgsdfgfd
-sdgsdfgfghdgfd
-123
-new line
-11111111
-vagrant@vagrant:~$ 
+vagrant@vagrant:~$ touch test_2
+vagrant@vagrant:~$ cat test
+1525312 sad123asxcz123sssxxx9 62
+vagrant@vagrant:~$ cat <test >test_2
+vagrant@vagrant:~$ cat test_2
+1525312 sad123asxcz123sssxxx9 62
+vagrant@vagrant:~$
 
 6. Получится ли вывести находясь в графическом режиме данные из PTY в какой-либо из эмуляторов TTY? Сможете ли вы наблюдать выводимые данные?
 
@@ -125,8 +118,8 @@ env
 
 11. Узнайте, какую наиболее старшую версию набора инструкций SSE поддерживает ваш процессор с помощью `/proc/cpuinfo`.
 
-SSE 4.2
 vagrant@vagrant:~$ grep sse /proc/cpuinfo
+SSE 4.2
 
 12. При открытии нового окна терминала и `vagrant ssh` создается новая сессия и выделяется pty. Это можно подтвердить командой `tty`, которая упоминалась в лекции 3.2. Однако:
 
