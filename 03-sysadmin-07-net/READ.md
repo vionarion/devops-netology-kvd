@@ -16,6 +16,7 @@
 Пакет в Ubuntu Linux - vlan
 
 
+
 4. Какие типы агрегации интерфейсов есть в Linux? Какие опции есть для балансировки нагрузки? Приведите пример конфига.
 
 
@@ -35,5 +36,14 @@
 
 7. Как проверить ARP таблицу в Linux, Windows? Как очистить ARP кеш полностью? Как из ARP таблицы удалить только один нужный IP?
 
+![](png/2.png)
 
+![](png/3.png)
 
+очистить ARP кеш -
+ip neigh flush all -linux
+arp -d * -windows
+
+Удалить один IP:
+Linux: ip neigh delete dev , arp -d
+Windows: arp -d
