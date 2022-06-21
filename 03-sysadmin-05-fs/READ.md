@@ -47,8 +47,11 @@ cp --sparse=always ./simple-file ./sparse-file
 12. Протестируйте целостность файла:
 
 root@vagrant:~# gzip -t /tmp/new/test.gz
+
 root@vagrant:~# echo $?
+
 0
+
 4. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
 
 4. Сделайте --fail на устройство в вашем RAID1 md.
@@ -58,7 +61,10 @@ root@vagrant:~# echo $?
 4. Протестируйте целостность файла, несмотря на "сбойный" диск он должен продолжать быть доступен:
 
 root@vagrant:~# gzip -t /tmp/new/test.gz
+
 root@vagrant:~# echo $?
+
 0
+
 4. Погасите тестовый хост, vagrant destroy.
 
