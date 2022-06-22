@@ -55,11 +55,11 @@ root@vagrant:~# echo $?
 4. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
 ![](Screenshot_17.png)
 4. Сделайте --fail на устройство в вашем RAID1 md.
-
+![](Screenshot_18.png)
 4. Подтвердите выводом dmesg, что RAID1 работает в деградированном состоянии.
-
+![](Screenshot_20.png)
 4. Протестируйте целостность файла, несмотря на "сбойный" диск он должен продолжать быть доступен:
-
+![](Screenshot_22.png)
 root@vagrant:~# gzip -t /tmp/new/test.gz
 
 root@vagrant:~# echo $?
@@ -67,4 +67,5 @@ root@vagrant:~# echo $?
 0
 
 4. Погасите тестовый хост, vagrant destroy.
+![](Screenshot_23.png)
 
