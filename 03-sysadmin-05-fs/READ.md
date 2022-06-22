@@ -33,19 +33,19 @@ cp --sparse=always ./simple-file ./sparse-file
 5. Создайте 2 независимых PV на получившихся md-устройствах.
 ![](Screenshot_8.png)
 6. Создайте общую volume-group на этих двух PV.
-![](Screenshot_9.png)
+![](Screenshot_10.png)
 7. Создайте LV размером 100 Мб, указав его расположение на PV с RAID0.
-
+![](Screenshot_11.png)
 8. Создайте mkfs.ext4 ФС на получившемся LV.
-
+![](Screenshot_12.png)
 9. Смонтируйте этот раздел в любую директорию, например, /tmp/new.
-
+![](Screenshot_13.png)
 10. Поместите туда тестовый файл, например wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz.
-
+![](Screenshot_14.png)
 11. Прикрепите вывод lsblk.
-
+![](Screenshot_15.png)
 12. Протестируйте целостность файла:
-
+![](Screenshot_16.png)
 root@vagrant:~# gzip -t /tmp/new/test.gz
 
 root@vagrant:~# echo $?
@@ -53,7 +53,7 @@ root@vagrant:~# echo $?
 0
 
 4. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
-
+![](Screenshot_17.png)
 4. Сделайте --fail на устройство в вашем RAID1 md.
 
 4. Подтвердите выводом dmesg, что RAID1 работает в деградированном состоянии.
